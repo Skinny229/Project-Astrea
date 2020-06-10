@@ -27,7 +27,8 @@ function createAuthWindow() {
 
   webRequest.onBeforeRequest(filter, async ({url}) => {
     await authService.loadTokens(url);
-    console.log(authService.getProfile());
+    await authService.refreshTokens(url);
+    console.log('This is being called: ' + authService.getProfile());
     createAppWindow();
     return destroyAuthWin();
   });
@@ -44,6 +45,7 @@ function createAuthWindow() {
 
 function destroyAuthWin() {
   if (!win) return;
+ // authService.loadTokens('file:///callback*');
   win.close();
   win = null;
 }
