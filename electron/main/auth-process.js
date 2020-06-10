@@ -27,6 +27,7 @@ function createAuthWindow() {
 
   webRequest.onBeforeRequest(filter, async ({url}) => {
     await authService.loadTokens(url);
+    await authService.refreshTokens(url);
     console.log('This is being called: ' + authService.getProfile());
     createAppWindow();
     return destroyAuthWin();
