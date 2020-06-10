@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="profile.css">
         <title>Astrea</title>
     </head>
-        
+    <script src="home.js" ></script>
     <body>
         <div class="container-fluid" style="background-color: black;">
             <div class="row">
@@ -16,20 +16,19 @@
                     <div class="row">
                         <div class="profile-pic-div col-2">
                             <div class="profile-crop" >
-                                <img class="profile-pic" src="https://cdn.discordapp.com/avatars/277469544480768000/82fe99843391ea46941eb96bd1c2ec95.png">
+                                <img id = "picture" class="profile-pic">
                             </div>
                         </div>
                         <div class="col-4">
-                            <h1 class="bottom-align-text">Welcome,</br>Sneakyevil</h1>
+                            <h1 id="name" class="bottom-align-text">Welcome,</br></h1>
                         </div>
                         <div class="col-6">
-                            <div id="buttons" class="buttoncontainer container-fluid">
+                            <div  class="buttoncontainer container-fluid">
                                 <div class="d-flex justify-content-end">
-                                    <a href="home.html" class="btn btn-outline-primary" role="button">Homepage</a>
+                                    <a href="home.html" class="btn btn-outline-primary" >Homepage</a>
                                 </div>
-                                <div class="d-flex justify-content-end" style="padding-top: 10px;">
-                                    <button type="button" class="btn btn-outline-danger">Logout</button>
-                                    <!-- TODO: Actually implement logging out-->
+                                <div  class="d-flex justify-content-end" style="padding-top: 10px;">
+                                    <button id="Logout" class="btn btn-outline-danger">Logout</button>
                                 </div>
 
                             </div>
