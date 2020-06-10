@@ -16,7 +16,11 @@ webContents.on('dom-ready', () => {
 
 document.getElementById('logout').onclick = async () => {
   await authProcess.createLogoutWindow();
-  axios.get('https://echotest.auth0.com/userinfo', {
+  remote.getCurrentWindow().close();
+};
+
+document.getElementById('secured-request').onclick = () => {
+  axios.get('http://localhost:3000/private', {
     headers: {
       'Authorization': `Bearer ${authService.getAccessToken()}`,
     },
@@ -27,5 +31,4 @@ document.getElementById('logout').onclick = async () => {
   }).catch((error) => {
     if (error) throw new Error(error);
   });
- // remote.getCurrentWindow().close();
 };

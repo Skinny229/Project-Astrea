@@ -13,7 +13,7 @@ function createAuthWindow() {
     height: 600,
   });
 
-
+  
 
   win.loadURL(authService.getAuthenticationURL());
 
