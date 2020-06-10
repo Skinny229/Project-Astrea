@@ -1,3 +1,12 @@
+body {
+  color: white;
+}
+
+.header-div {
+  background-image: url('https://cdn.discordapp.com/attachments/719669089286488138/719674846061133854/echobg-small.jpg'); 
+  height: 175px;
+}
+
 .profile-crop {
   width: 100px;
   height: 100px;
@@ -18,10 +27,16 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  color: white;
 }
 
 .profile-pic-div {
   height: 175px;
 }
+
+.profile-bottom-div {
+  background-color: #000000;
+  height: auto;
+}
+
+
 
