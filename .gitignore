@@ -8,8 +8,8 @@
 *.elf
 
 #ay lmao
-electron/
-node_modules/
+electron/dist/
+electron/node_modules/
 
 # Linker output
 *.ilk
