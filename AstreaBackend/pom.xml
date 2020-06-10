@@ -9,12 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.echovrprotocol</groupId>
-	<artifactId>backend</artifactId>
+	<artifactId>ahhyes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Astrea Project</name>
-	<description>Astrea GUI backend for LFG + more</description>
+	<name>ahhyes</name>
+	<description>Demo project for Spring Boot</description>
+
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>

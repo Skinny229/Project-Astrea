@@ -15,8 +15,8 @@ webContents.on('dom-ready', () => {
 });
 
 document.getElementById('logout').onclick = async () => {
-  await authProcess.createLogoutWindow();
-  axios.get('https://echotest.auth0.com/userinfo', {
+  //await authProcess.createLogoutWindow();
+  axios.get('localhost:3000/api/private', {
     headers: {
       'Authorization': `Bearer ${authService.getAccessToken()}`,
     },
