@@ -1,0 +1,27 @@
+.profile-crop {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  overflow: hidden;
+  border-radius: 50%;
+  bottom: 10px;
+  right: 20px;
+}
+.profile-pic {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.bottom-align-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+}
+
+.profile-pic-div {
+  height: 175px;
+}
+
