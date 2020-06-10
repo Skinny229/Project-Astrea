@@ -1,3 +1,11 @@
 debug: true
 server:
   port: 3000
+spring:
+  sercurity:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: ${client-id-auth0}
+            client-secret: ${client-secret-auth0}
