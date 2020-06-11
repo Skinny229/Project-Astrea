@@ -7,6 +7,7 @@ const authService = require('./services/auth-service');
 async function showWindow() {
   try {
     await authService.refreshTokens();
+    console.log('going here');
     return createAppWindow();
   } catch (err) {
     createAuthWindow();

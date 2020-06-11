@@ -1,11 +1,9 @@
+const jwtDecode = require('jwt-decode');
 const request = require('request');
 const url = require('url');
 const envVariables = require('../env-variables');
 const keytar = require('keytar');
 const os = require('os');
-const jwt = require('jsonwebtoken');
-const util =  require('util');
-
 
 const {apiIdentifier, auth0Domain, clientId} = envVariables;
 
@@ -39,7 +37,7 @@ function refreshTokens() {
   return new Promise(async (resolve, reject) => {
     const refreshToken = await keytar.getPassword(keytarService, keytarAccount);
 
-    if (refreshToken === " " || refreshToken === undefined) return reject();
+    if (!refreshToken) return reject();
 
     const refreshOptions = {
       method: 'POST',
@@ -60,8 +58,8 @@ function refreshTokens() {
       }
 
       accessToken = body.access_token;
-      profile = jwt.decode(body.id_token);
-      console.log('Profile thingy: ' + util.inspect(profile, {showHidden: false, depth: null}));
+      profile = jwtDecode(body.id_token);
+
       resolve();
     });
   });
@@ -69,8 +67,6 @@ function refreshTokens() {
 
 function loadTokens(callbackURL) {
   return new Promise((resolve, reject) => {
-    console.log("creating promise");
-    console.log(url.parse(callbackURL, true));
     const urlParts = url.parse(callbackURL, true);
     const query = urlParts.query;
 
@@ -90,28 +86,20 @@ function loadTokens(callbackURL) {
       body: JSON.stringify(exchangeOptions),
     };
 
-    request(options, async function(error, resp, body)  {
+    request(options, async (error, resp, body) => {
       if (error || body.error) {
-        console.log("Error obtaining Access_token");
         await logout();
         return reject(error || body.error);
       }
-       
+
       const responseBody = JSON.parse(body);
       accessToken = responseBody.access_token;
-      profile = jwt.decode(body.id_token);
-      resolve();
-      console.log('Response Body' + util.inspect(responseBody, {showHidden: false, depth: null}));
-      console.log('-------------------------')
-      console.log('Profile thingy: ' + util.inspect(profile, {showHidden: false, depth: null}));
-     
-
+      profile = jwtDecode(responseBody.id_token);
       refreshToken = responseBody.refresh_token;
-	  if(refreshToken === undefined)
-		  refreshToken = " ";
 
       keytar.setPassword(keytarService, keytarAccount, refreshToken);
 
+      resolve();
     });
   });
 }
