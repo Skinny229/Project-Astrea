@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Handles requests to "/api" endpoints.
+ * Handles requests to "/api/lfg" endpoints.
+ *
+ * Dedicated to updating and listing LFG games for the public
+ * Requires the user to be identified
  */
 
 

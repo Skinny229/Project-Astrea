@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron ./",
-    "build": "electron-packager ./ --overwrite --out ./dist"
+    "package": "electron-packager ./ --overwrite --out ./dist"
   },
   "devDependencies": {
     "electron": "^9.0.2",
@@ -23,5 +23,10 @@
     "package.json": "^2.0.1",
     "request": "^2.88.2",
     "util": "^0.12.3"
+  },
+  "build": {
+    "win": {
+      "publish": ["github", "bintray"]
+    }
   }
 }

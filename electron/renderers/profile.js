@@ -15,7 +15,6 @@ webContents.on('dom-ready', () => {
   
 
 document.getElementById('logoutandexit').onclick = async () => {
-    console.log('this is bein clicked');
     await authProcess.createLogoutWindow();
     remote.getCurrentWindow().close();
 };

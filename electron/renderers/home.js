@@ -10,5 +10,16 @@ webContents.on('dom-ready', () => {
 });
 
 document.getElementById('exit').onclick = async () => {
-  remote.getCurrentWindow().close();
+  axios.get('http://localhost:3000/api/private', {
+    headers: {
+      'Authorization': `Bearer ${authService.getAccessToken()}`,
+    },
+  }).then((response) => {
+    const messageJumbotron = document.getElementById('message');
+    messageJumbotron.innerText = response.data;
+    messageJumbotron.style.display = 'block';
+  }).catch((error) => {
+    if (error) throw new Error(error);
+  });
+  //remote.getCurrentWindow().close();
 }
