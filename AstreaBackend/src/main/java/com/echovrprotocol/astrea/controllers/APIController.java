@@ -32,7 +32,7 @@ public class APIController {
 
     @GetMapping(value = "/private")
     public Message privateEndpoint( Authentication user) {
-        logger.info(user.toString());
+
         return new Message("All good. You can see this because you are Authenticated.");
     }
 

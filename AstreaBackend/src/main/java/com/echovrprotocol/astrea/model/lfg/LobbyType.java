@@ -1,4 +1,4 @@
-package com.echovrprotocol.astrea.model;
+package com.echovrprotocol.astrea.model.lfg;
 
 public enum LobbyType {
     PRIVATE("private"),

@@ -10,7 +10,7 @@ webContents.on('dom-ready', () => {
 });
 
 document.getElementById('exit').onclick = async () => {
-  axios.get('http://localhost:3000/api/private', {
+  axios.get('http://localhost:3000/api/lfg/lobbies', {
     headers: {
       'Authorization': `Bearer ${authService.getAccessToken()}`,
     },
