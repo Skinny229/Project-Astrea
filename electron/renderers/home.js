@@ -6,17 +6,11 @@ const authProcess = remote.require('./main/auth-process');
 const webContents = remote.getCurrentWebContents();
 
 webContents.on('dom-ready', () => {
-  console.log('the fuck');
-  const profile = authService.getProfile();
-  console.log(profile);
-  document.getElementById('picture').src = profile.picture;
-  document.getElementById('name').innerText = profile.name;
-  document.getElementById('success').innerText = 'You successfully used OpenID Connect and OAuth 2.0 to authenticate.';
+ 
 });
 
-document.getElementById('logout').onclick = async () => {
-  await authProcess.createLogoutWindow();
-  axios.get('https://echotest.auth0.com/userinfo', {
+document.getElementById('exit').onclick = async () => {
+  axios.get('http://localhost:3000/api/lfg/lobbies', {
     headers: {
       'Authorization': `Bearer ${authService.getAccessToken()}`,
     },
@@ -27,5 +21,5 @@ document.getElementById('logout').onclick = async () => {
   }).catch((error) => {
     if (error) throw new Error(error);
   });
- // remote.getCurrentWindow().close();
-};
+  //remote.getCurrentWindow().close();
+}

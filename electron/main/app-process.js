@@ -10,7 +10,6 @@ function createAppWindow() {
   });
 
   win.loadFile('./renderers/home.html');
-  console.log("Try this");
 
   win.on('closed', () => {
     win = null;
