@@ -13,8 +13,6 @@ function createAuthWindow() {
     height: 600,
   });
 
-
-
   win.loadURL(authService.getAuthenticationURL());
 
   const {session: {webRequest}} = win.webContents;
@@ -27,14 +25,11 @@ function createAuthWindow() {
 
   webRequest.onBeforeRequest(filter, async ({url}) => {
     await authService.loadTokens(url);
-    await authService.refreshTokens(url);
-    console.log('This is being called: ' + authService.getProfile());
     createAppWindow();
     return destroyAuthWin();
   });
 
   win.on('authenticated', () => {
-    console.log(authService.getProfile());
     destroyAuthWin();
   });
 
@@ -45,7 +40,6 @@ function createAuthWindow() {
 
 function destroyAuthWin() {
   if (!win) return;
- // authService.loadTokens('file:///callback*');
   win.close();
   win = null;
 }

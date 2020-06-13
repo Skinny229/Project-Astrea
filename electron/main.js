@@ -1,12 +1,15 @@
 const {app} = require('electron');
-
+const { autoUpdater } = require('electron-updater');
 const {createAuthWindow} = require('./main/auth-process');
 const createAppWindow = require('./main/app-process');
 const authService = require('./services/auth-service');
 
+
 async function showWindow() {
+  autoUpdater.checkForUpdatesAndNotify()
   try {
     await authService.refreshTokens();
+    console.log('going here');
     return createAppWindow();
   } catch (err) {
     createAuthWindow();
