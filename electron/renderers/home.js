@@ -21,5 +21,5 @@ document.getElementById('exit').onclick = async () => {
   }).catch((error) => {
     if (error) throw new Error(error);
   });
-  //remote.getCurrentWindow().close();
+  remote.getCurrentWindow().close();
 }

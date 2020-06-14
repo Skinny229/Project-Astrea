@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(path = "api/lfg", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/lfg", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LFGController {
 
 
@@ -29,7 +29,7 @@ public class LFGController {
 
 
     @GetMapping(value = "/lobbies", produces = "application/json")
-    public JSONObject getLobbies(Authentication user, @RequestBody(required = false) LobbyFilters filters){
+    public JSONObject getLobbies(Authentication authentication, @RequestBody(required = false) LobbyFilters filters){
 
         JSONObject response = new JSONObject();
         ArrayList<Long> ids = new ArrayList<>();

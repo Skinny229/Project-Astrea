@@ -1,10 +1,16 @@
-debug: false
+debug: true
 server:
   port: 3000
+  ssl:
+    key-store: classpath:keystore/astreabackend.p12
+    key-store-password: ""
+    key-store-type: PKCS12
+    key-alias: ${SSL_BACKEND}
+    enabled: false
 spring:
   datasource:
     url: ${SQL_URL}
-    username: root
+    username: ${SQL_USER}
     password: ${SQL_PASS}
   jpa:
     hibernate:
