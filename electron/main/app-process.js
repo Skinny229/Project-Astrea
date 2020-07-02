@@ -25,8 +25,8 @@ function createAppWindow() {
   });
 
   let win = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1300,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     },
