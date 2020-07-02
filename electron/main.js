@@ -2,7 +2,11 @@ const {app} = require('electron');
 const { autoUpdater } = require('electron-updater');
 const {createAuthWindow} = require('./main/auth-process');
 const createAppWindow = require('./main/app-process');
+const isDev = require('electron-is-dev');
 const authService = require('./services/auth-service');
+
+ autoUpdater.logger = require('electron-log');
+ autoUpdater.logger.transports.file.level = 'info';
 
 
 async function showWindow() {
