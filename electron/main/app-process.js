@@ -32,7 +32,7 @@ function createAppWindow() {
     },
   });
 
-  win.loadFile('./renderers/home.html');
+  win.loadFile('./renderers/home/home.html');
 
   win.on('closed', () => {
     win = null;
