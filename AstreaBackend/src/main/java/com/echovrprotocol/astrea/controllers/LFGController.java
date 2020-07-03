@@ -44,10 +44,7 @@ public class LFGController {
             ids.add(lobby.getLfgLobbyId());
 
         //TODO: Get password protected Lobbies
-
         //TODO: Get group lobbies
-
-
 
         //Format arraylist into JsonObject\
         JsonArray array = new JsonArray();

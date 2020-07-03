@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class LFGLobbyService {
 
     private static HashMap<Long, EchoSession> echoSessions = new HashMap<>();
-    private static HashMap<Long, LFGLobby> LFGLobbies = new HashMap<>();
+    public static HashMap<Long, LFGLobby> LFGLobbies = new HashMap<>();
 
     public ArrayList<LFGLobby> getPublicLobbies() {
         ArrayList<LFGLobby> result = new ArrayList<>();

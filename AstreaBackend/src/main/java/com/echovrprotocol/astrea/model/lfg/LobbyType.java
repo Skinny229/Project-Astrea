@@ -1,17 +1,17 @@
 package com.echovrprotocol.astrea.model.lfg;
 
 public enum LobbyType {
-    PRIVATE("private"),
-    PUBLIC("public"),
-    GROUPS("groups");
+    PRIVATE(1),
+    PUBLIC(2),
+    GROUPS(3);
 
-    private String type;
+    private int type;
 
-    LobbyType(String type){
+    LobbyType(int type){
         this.type = type;
     }
 
-    public String getType(){
+    public int getType(){
         return type;
     }
 }

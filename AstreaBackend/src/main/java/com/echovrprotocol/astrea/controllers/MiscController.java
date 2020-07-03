@@ -6,7 +6,6 @@ import com.echovrprotocol.astrea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +33,7 @@ public class MiscController {
         if(authentication.isAuthenticated() && possibleUser.isEmpty() ){
             User newUser = new User();
             newUser.setDiscordId(possibleId);
+            //newUser.setDiscordProfilePic();
             userService.save(newUser);
             System.out.println("yay login");
         }
