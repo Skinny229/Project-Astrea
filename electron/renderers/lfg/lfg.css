@@ -1,0 +1,21 @@
+.profile-crop {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 50%;
+    bottom: 0px;
+    right: 20px;
+  }
+  
+  .profile-pic {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+  }
+
+
+  .listing{
+      background-color: blue;
+  }
