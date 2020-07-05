@@ -1,13 +1,15 @@
 const {remote} = require('electron');
 const axios = require('axios');
-const astreaService = require('../services/astrea-service.js');
+const astreaService = remote.require('./services/astrea-service');
+const authService = remote.require('./services/auth-service');
+const mainWindow = remote.require('./main.js');
+
 
 const webContents = remote.getCurrentWebContents();
 
 webContents.on('dom-ready', () => {
 
-    reloadListings();
-
+   //  reloadListings();
 
   })
 
@@ -16,15 +18,10 @@ webContents.on('dom-ready', () => {
 };
 
 
-
-function reloadListings(){
+async function reloadListings() {
         
-    //var lobbies = astreaService.getLFGListings();
 
-
-
-    console.log('running this');
-
+    /*
     var lobbyay = {};
     lobbyay.avatar = "https://cdn.discordapp.com/attachments/667493434092945428/714714537202417664/Screenshot_112.png";
     lobbyay.name = "Skinnay";
@@ -34,18 +31,61 @@ function reloadListings(){
     lobbyay.status = 'IN GAME-WAITING'
     var listing = generateGameLobbyDiv(lobbyay);
     console.log(listing);
-    document.getElementById('listings').innerHTML = "";
+    */
+
+    var listingsDiv =  document.getElementById('listings');
+
+    //Clear the inside
+    listingsDiv.innerHTML = "";
     
+
+    //Retrieve Available lobby Ids
+    var lobbyIds = await getLFGLobbyIds();
+
+    //Retrieve lobby Data
+    var lobbyDataArr = await getLFGLobbyDetails(lobbyIds.lobbyids);
+    
+    //Append them
+    for(var i = 0; i < lobbyDataArr.length; i++)
+      listingsDiv.append(generateGameLobbyDiv(lobbyDataArr[i]));
 
   }
 
-  document.getElementById('lfgreload').onclick = async () => {
-    reloadListings();
 
-};
+async function getLFGLobbyIds(){
+  axios.get('http://localhost:3000/api/lfg/lobbies', {
+    headers: {
+      'Authorization': `Bearer ${authService.getAccessToken()}`,
+    },
+  }).then((response) => {
+    console.log(response.data);
+    return response.data;
+  }).catch((error) => {
+    if (error) throw new Error(error);
+  });
+}
 
+async function getLFGLobbyDetails(lobbyArr){ 
 
+  var lobbyDataArray = [];
 
+  for(var i = 0; i < lobbyArr.length; i++){
+  axios.get('http://localhost:3000/api/lfg/lobbydata', {
+    headers: {
+      'Authorization': `Bearer ${authService.getAccessToken()}`,
+    },
+    body:{
+      'id': lobbyArr[i]
+    }
+  }).then((response) => {
+    console.log(response.data);
+    lobbyDataArray.append(response.data);
+  }).catch((error) => {
+    if (error) throw new Error(error);
+  });
+  }
+
+}
 
 function generateGameLobbyDiv(lobby){
 

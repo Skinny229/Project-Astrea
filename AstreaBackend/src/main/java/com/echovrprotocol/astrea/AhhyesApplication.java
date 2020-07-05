@@ -19,8 +19,8 @@ public class AhhyesApplication {
 		mhm.setDiscordId(123123123);
 		mhm.setDiscordName("Skinnay");
 		//mhm.setDiscordProfilePic("");
-		lobby.addPlayer(mhm);
-		lobby.addPlayer(new User());
+		lobby.addUser(mhm);
+		lobby.addUser(new User());
 		LFGLobbyService.LFGLobbies.put(lobby.getLfgLobbyId(), lobby);
 
 		SpringApplication.run(AhhyesApplication.class, args);

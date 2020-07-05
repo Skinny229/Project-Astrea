@@ -34,9 +34,9 @@ public class LFGController {
 
 
     @GetMapping(value = "/lobbies", produces = "application/json")
-    public JsonObject getLobbies(Authentication authentication, @RequestBody(required = false) LobbyFilters filters){
+    public JSONObject getLobbies(Authentication authentication, @RequestBody(required = false) LobbyFilters filters){
 
-        JsonObject response = new JsonObject();
+        JSONObject response = new JSONObject();
         ArrayList<Long> ids = new ArrayList<>();
 
         //Get public lobbies
@@ -46,11 +46,26 @@ public class LFGController {
         //TODO: Get password protected Lobbies
         //TODO: Get group lobbies
 
-        //Format arraylist into JsonObject\
-        JsonArray array = new JsonArray();
-        for(long id : ids)
-            array.add(id);
-        response.add("lobbyids", array);
+        //Format arraylist into JsonObject
+        response.put("lobbyids", ids);
+        return response;
+    }
+
+    @GetMapping(value = "/lobbydata", produces = "application/json")
+    public JSONObject getLobbyData(Authentication authentication,@RequestBody long id){
+        JSONObject response = new JSONObject();
+        LFGLobby lobby = lfgLobbyService.getLobbyFromId(id);
+
+        if(!authentication.isAuthenticated() || lobby == null)
+            return response;
+
+        response.put("avatar", lobby.getLeader().getDiscordProfilePic() );
+        response.put("name", lobby.getLeader().getDiscordName());
+        response.put("nickname", "WIP for v0.3.0");
+        response.put("players",lobby.getPlayers());
+        response.put("status", "WIP for v0.3.0");
+
+
         return response;
     }
 
@@ -59,6 +74,7 @@ public class LFGController {
     public void linkEchoSession(){
         //Make sure no link has been done
     }
+
 
 
     @GetMapping(value = "/joinLobby", produces = "application/json")
@@ -94,8 +110,9 @@ public class LFGController {
     @GetMapping(value = "/lobbyStatus", produces = "application/json")
     public JsonObject lobbyStatus(Authentication authentication, @RequestBody (required = false) LFGLobby lobby){
         //verify user is with the lobby
-        if(!lfgLobbyService.isUserInLobby(authentication))
+        if(!lfgLobbyService.isUserInLobby(authentication)) {
             return null;
+        }
 
         if(lobby == null)
             try {

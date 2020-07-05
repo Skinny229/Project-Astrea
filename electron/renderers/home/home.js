@@ -18,6 +18,7 @@ document.getElementById('exit').onclick = async () => {
     const messageJumbotron = document.getElementById('message');
     messageJumbotron.innerText = response.data;
     messageJumbotron.style.display = 'block';
+    console.log(response.data);
   }).catch((error) => {
     if (error) throw new Error(error);
   });

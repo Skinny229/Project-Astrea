@@ -20,13 +20,19 @@
                 <div class="col-md-2 text-center">Status</div>
                 <div class="col-md-3 text-center">
                     <a type="button" id="creategame" class="btn btn-info text-center">Create Game</a>
-                    <a type="button" id="lfgreload" class="btn btn-warning text-center">Reload</a>
+                    <a type="button" id="lfgreload" class="btn btn-warning text-center">Reload
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                    </a>
                     <a type="button" href="../home/home.html" class="btn btn-danger text-center">Home</a>
                 </div>
             </div>   
             <div class="row">.</div>
+            
             <div id="listings">
-                <div class="row bg-light">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <div class="row bg-light"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 
                 <div class="col-md-1 text-right"><img id="profilepic" src="https://cdn.discordapp.com/attachments/667493434092945428/714714537202417664/Screenshot_112.png" class="profile-crop profile-pic"></div>     
                 <div class="col-md-1 text-left">Skinny</div>    
@@ -36,7 +42,18 @@
                 <div class="col-md-2 text-center"><a type="button" id="test" class="btn btn-success">Join</a>
                 </div>
             </div>
+                    </div>
+        
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#listings">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+              
             </div>
+            </div>
+       
+    </div>
     
     </body>
     <script src="lfg.js"></script>

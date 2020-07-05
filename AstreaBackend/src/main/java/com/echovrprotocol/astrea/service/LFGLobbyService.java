@@ -63,4 +63,8 @@ public class LFGLobbyService {
 
     public void createLobby(Authentication authentication, LFGLobbySettings settings) {
     }
+
+    public LFGLobby getLobbyFromId(long id) {
+        return LFGLobbies.get(id);
+    }
 }

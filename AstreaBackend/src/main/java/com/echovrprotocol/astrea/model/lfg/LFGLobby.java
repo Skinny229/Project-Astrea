@@ -14,57 +14,63 @@ public class LFGLobby {
 
 
     private long lfgLobbyId;
-    private String lfgLobbyName;
-    LobbyType type;
-    private String associatedEchoLobbyId;
-    private int playerMaxCount;
-    private final HashSet<User> players = new HashSet<>();
 
+    private LobbyType type;
 
+    private int maxPlayers;
 
+    private ArrayList<User> players;
 
-    public long getLfgLobbyId() {
-        return lfgLobbyId;
+    //Getters
+
+    //custom gets
+    public User getLeader(){
+        return players.get(0);
     }
 
-    public void setLfgLobbyId(long lfglobbyId) {
-        this.lfgLobbyId = lfglobbyId;
+    public int getPlayerCount(){
+        return players.size();
+    }
+
+    //Generic Gets
+    public long getLfgLobbyId() {
+        return lfgLobbyId;
     }
 
     public LobbyType getType() {
         return type;
     }
 
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public ArrayList<User> getPlayers() {
+        return players;
+    }
+
+
+
+    //Setters
+    public void setLfgLobbyId(long lfgLobbyId) {
+        this.lfgLobbyId = lfgLobbyId;
+    }
+
     public void setType(LobbyType type) {
         this.type = type;
     }
 
-    public String getAssociatedEchoLobbyId() {
-        return associatedEchoLobbyId;
+    public void addUser(User user){
+        this.players.add(user);
     }
 
-    public void setAssociatedEchoLobbyId(String associatedEchoLobbyId) {
-        this.associatedEchoLobbyId = associatedEchoLobbyId;
-    }
-
-    public int getPlayerCount() {
-        return players.size();
-    }
-
-    public HashSet<User> getPlayers(){
-        return  players;
-    }
-
-    public void addPlayer(User user){
-        players.add(user);
-    }
-    public void removePlayer(User user){
-        players.remove(user);
+    public void removeUser(User user){
+        this.players.remove(user);
 
     }
-
-
-
+    public void setMaxPlayers(int max){
+        this.maxPlayers = max;
+    }
 
 
 
