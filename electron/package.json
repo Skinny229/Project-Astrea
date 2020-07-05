@@ -1,11 +1,12 @@
 {
   "name": "astrea",
-  "version": "0.1.1",
-  "description": "",
+  "version": "0.1.2",
+  "author":"Skinny and Sneaky",
+  "description": "Competitive Echo Arena Tools",
   "main": "main.js",
   "scripts": {
     "start": "electron ./",
-    "package": "electron-packager ./ --overwrite --out ./dist --icon=./icon.png",
+    "package": "electron-packager ./ --overwrite --out ./dist ",
     "build": "electron-builder build  --win --publish never",
     "deploy": "electron-builder build  --win --publish always"
   },

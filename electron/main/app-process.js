@@ -1,6 +1,7 @@
 const {BrowserWindow} = require('electron');
 const authService = require('../services/auth-service');
 const envVariables = require('../env-variables');
+const isDev = require('electron-is-dev');
 const request = require('request');
 
 const {apiIdentifier, auth0Domain, clientId, backendURL} = envVariables;
@@ -32,8 +33,11 @@ function createAppWindow() {
     },
   });
 
-  win.loadFile('./renderers/home/home.html');
 
+  if(!isDev)
+    win.removeMenu();
+
+  win.loadFile('./renderers/home/home.html');
   win.on('closed', () => {
     win = null;
   });

@@ -8,7 +8,7 @@ const {apiIdentifier, auth0Domain, clientId, backendURL} = envVariables;
 
 
 function getLFGListings(){
-
+    
 }
 
 function updateLobby(){}
