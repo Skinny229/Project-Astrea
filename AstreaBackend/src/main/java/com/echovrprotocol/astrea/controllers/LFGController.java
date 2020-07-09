@@ -52,16 +52,18 @@ public class LFGController {
     }
 
     @GetMapping(value = "/lobbydata", produces = "application/json")
-    public JSONObject getLobbyData(Authentication authentication,@RequestBody long id){
+    public JSONObject getLobbyData(Authentication authentication,@RequestParam long id){
         JSONObject response = new JSONObject();
         LFGLobby lobby = lfgLobbyService.getLobbyFromId(id);
 
         if(!authentication.isAuthenticated() || lobby == null)
             return response;
 
-        response.put("avatar", lobby.getLeader().getDiscordProfilePic() );
+        response.put("avatar", lobby.getLeader().getDiscordProfilePic());
         response.put("name", lobby.getLeader().getDiscordName());
         response.put("nickname", "WIP for v0.3.0");
+        response.put("currentPlayers", lobby.getPlayerCount());
+        response.put("maxPlayers", 8);
         response.put("players",lobby.getPlayers());
         response.put("status", "WIP for v0.3.0");
 

@@ -1,7 +1,7 @@
 {
   "name": "astrea",
   "version": "0.1.2",
-  "author":"Skinny and Sneaky",
+  "author": "Skinny and Sneaky",
   "description": "Competitive Echo Arena Tools",
   "main": "main.js",
   "scripts": {
@@ -18,14 +18,17 @@
   "dependencies": {
     "axion": "^0.1.0",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
     "cross-env": "^7.0.2",
     "electron-is-dev": "^1.2.0",
     "electron-log": "^4.2.2",
     "electron-updater": "^4.3.1",
+    "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "keytar": "^6.0.1",
     "package.json": "^2.0.1",
+    "popper.js": "^1.16.1",
     "request": "^2.88.2",
     "util": "^0.12.3"
   },

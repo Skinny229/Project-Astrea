@@ -33,10 +33,10 @@ function createAppWindow() {
     },
   });
 
-
   if(!isDev)
     win.removeMenu();
 
+  
   win.loadFile('./renderers/home/home.html');
   win.on('closed', () => {
     win = null;

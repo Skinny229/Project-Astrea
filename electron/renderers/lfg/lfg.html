@@ -1,61 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>  
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" href="lfg.css">
-        <title>Astrea LFG</title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="lfg.css">
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Astrea LFG</title>
+</head>
 
-    <body  style="background-image: url(https://cdn.discordapp.com/attachments/719669089286488138/719674846061133854/echobg-small.jpg);background-position: center;
+<body style="background-image: url(https://cdn.discordapp.com/attachments/719669089286488138/719674846061133854/echobg-small.jpg);background-position: center;
     background-size: fill;">
-        
-            <div class="row bg-primary">
-    
-                <div class="col-md-2 text-center">Game Leader</div>
-                <div class="col-md-3 text-center">Nickname</div>
-                <div class="col-md-2 text-center">Players</div>
-                <div class="col-md-2 text-center">Status</div>
-                <div class="col-md-3 text-center">
-                    <a type="button" id="creategame" class="btn btn-info text-center">Create Game</a>
-                    <a type="button" id="lfgreload" class="btn btn-warning text-center">Reload
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        <span class="sr-only">Loading...</span>
-                    </a>
-                    <a type="button" href="../home/home.html" class="btn btn-danger text-center">Home</a>
-                </div>
-            </div>   
-            <div class="row">.</div>
-            
-            <div id="listings">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <div class="row bg-light"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                
-                <div class="col-md-1 text-right"><img id="profilepic" src="https://cdn.discordapp.com/attachments/667493434092945428/714714537202417664/Screenshot_112.png" class="profile-crop profile-pic"></div>     
-                <div class="col-md-1 text-left">Skinny</div>    
-                <div class="col-md-3 text-center">every1 but zeus</div>
-                <div class="col-md-2 text-center">1/8</div>
-                <div class="col-md-2 text-center">In-Game -- WAITING</div>
-                <div class="col-md-2 text-center"><a type="button" id="test" class="btn btn-success">Join</a>
-                </div>
-            </div>
-                    </div>
-        
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#listings">
-                <div class="card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-              
-            </div>
-            </div>
-       
+   
+    <div class="row bg-primary">
+
+        <div class="col-md-2 text-center">Game Leader</div>
+        <div class="col-md-3 text-center">Nickname</div>
+        <div class="col-md-2 text-center">Players</div>
+        <div class="col-md-2 text-center">Status</div>
+        <div class="col-md-3 text-center">
+            <a type="button" id="creategame" class="btn btn-info text-center">Create Game</a>
+            <a type="button" id="lfgreload" class="btn btn-warning text-center">Reload
+
+            </a>
+            <a type="button" href="../home/home.html" class="btn btn-danger text-center">Home</a>
+        </div>
     </div>
-    
-    </body>
-    <script src="lfg.js"></script>
+    <div class="row">.</div>
+
+    <div id="listings">
+        <div class="card">
+            <div class="card-header">
+                <div class="row bg-light">
+                    <div class="col-md-1 text-right"><img id="profilepic"
+                            src="https://cdn.discordapp.com/attachments/667493434092945428/714714537202417664/Screenshot_112.png"
+                            class="profile-crop profile-pic"></div>
+                    <div class="col-md-1 text-left">Skinny</div>
+                    <div class="col-md-3 text-center">every1 but zeus</div>
+                    <div class="col-md-2 text-center">1/8</div>
+                    <div class="col-md-2 text-center">In-Game -- WAITING</div>
+                    <div class="col-md-2 text-center">
+                        <a class="btn btn-primary" data-toggle="collapse" href="#players1">Info</a>
+                        <a type="button" id="join" class="btn btn-success">Join</a>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="players1">
+                <div class="pannel-body">
+                    Players: Not zeus, Skinnay
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+      <script src="lfg.js"></script>
+</body>
 
 </html>

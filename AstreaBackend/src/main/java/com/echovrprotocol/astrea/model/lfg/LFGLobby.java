@@ -19,7 +19,7 @@ public class LFGLobby {
 
     private int maxPlayers;
 
-    private ArrayList<User> players;
+    private final ArrayList<User> players = new ArrayList<>();
 
     //Getters
 
