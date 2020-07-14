@@ -30,10 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         an OAuth2 Resource Server, using JWT validation.
         */
         http.authorizeRequests()
-                //Testing
-                .mvcMatchers("/api/public").permitAll()
-                .mvcMatchers("/api/private").authenticated()
-                .mvcMatchers("/api/private-scoped").hasAuthority("SCOPE_read:messages")
                 //LFG
                 .mvcMatchers("/api/lfg/lobbies").authenticated()
                 .mvcMatchers("/api/lfg/joinLobby").authenticated()
