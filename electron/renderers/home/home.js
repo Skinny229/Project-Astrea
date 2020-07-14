@@ -7,10 +7,13 @@ const webContents = remote.getCurrentWebContents();
 
 webContents.on('dom-ready', () => {
   var onLoginEndPoint = astreaService.getBackendURL() + 'api/misc/onlogin';
+  var profile = authService.getProfile();
   axios.get(onLoginEndPoint, {
     headers: {
       'Authorization': `Bearer ${authService.getAccessToken()}`,
-    }
+    },
+    params:{'name': profile.name,
+  'picture': profile.picture}
   }).then((response) => {
   }).catch((error) => {
     if (error) throw new Error(error);
