@@ -85,7 +85,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>main.Main</mainClass>
+							<mainClass>com.echovrprotocol.astrea.AhhyesApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
