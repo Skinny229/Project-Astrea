@@ -1,6 +1,7 @@
 const {BrowserWindow} = require('electron');
 const authService = require('../services/auth-service');
 const envVariables = require('../env-variables');
+const astreaService = require('../services/astrea-service');
 const isDev = require('electron-is-dev');
 const request = require('request');
 
@@ -11,9 +12,10 @@ var mainWindow;
 function createAppWindow() {
 
 
+  console.log('trying to run on login');
   const onAuthLogin = {
-    method: 'POST',
-    url: `http://${backendURL}/api/misc/onlogin`,
+    method: 'GET',
+    url: `http://${astreaService.getBackendURL()}/api/misc/onlogin`,
     headers: {'Authorization': 'Bearer ' + authService.getAccessToken()},
   };
   request(onAuthLogin, async function (error, response, body) {

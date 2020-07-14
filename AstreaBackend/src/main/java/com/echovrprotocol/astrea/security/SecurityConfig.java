@@ -32,12 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 //LFG
                 .mvcMatchers("/api/lfg/lobbies").authenticated()
+                .mvcMatchers("/api/lfg/lobbydata").authenticated()
                 .mvcMatchers("/api/lfg/joinLobby").authenticated()
-                .mvcMatchers("/api/lfg/leaveLobby").authenticated()
+                .mvcMatchers("/api/lfg/leavelobby").authenticated()
                 .mvcMatchers("/api/lfg/delLobby").authenticated()
-                .mvcMatchers("/api/lfg/createLobby").authenticated()
-                .mvcMatchers("/api/lfg/updateLobbyStatus").authenticated()
+                .mvcMatchers("/api/lfg/createlobby").authenticated()
+                .mvcMatchers("/api/lfg/lobbyStatus").authenticated()
                 .mvcMatchers("/api/lfg/updateEchoSessionStatus").authenticated()
+                //misc
+                .mvcMatchers("/api/misc/onlogin").authenticated()
                 //Group Maker
                 //Ranked
                 //Statistics

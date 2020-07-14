@@ -24,13 +24,14 @@ public class MiscController {
         this.userService = userService;
     }
 
-    @PostMapping("/onlogin")
+    @GetMapping("/onlogin")
     public void onLogin(Authentication authentication){
         long possibleId = AstreaUtility.getDiscordId(authentication.getName());
         Optional<User> possibleUser = userService.getUser(possibleId);
 
+        System.out.println("we got here");
         ////If the user is authenticated and is not registered then add him to the DB
-        if(authentication.isAuthenticated() && possibleUser.isEmpty() ){
+        if( possibleUser.isEmpty() ){
             User newUser = new User();
             newUser.setDiscordId(possibleId);
             //newUser.setDiscordProfilePic();
