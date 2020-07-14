@@ -6,6 +6,7 @@ import com.echovrprotocol.astrea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +24,8 @@ public class MiscController {
         this.userService = userService;
     }
 
-    @GetMapping("/onlogin")
+    @PostMapping("/onlogin")
     public void onLogin(Authentication authentication){
-
         long possibleId = AstreaUtility.getDiscordId(authentication.getName());
         Optional<User> possibleUser = userService.getUser(possibleId);
 

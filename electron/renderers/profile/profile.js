@@ -1,9 +1,7 @@
 const {remote} = require('electron');
 require('bootstrap');
-const axios = require('axios');
 const authService = remote.require('./services/auth-service');
 const authProcess = remote.require('./main/auth-process');
-const mainWindow = remote.require('./main.js');
 
 const webContents = remote.getCurrentWebContents();
 

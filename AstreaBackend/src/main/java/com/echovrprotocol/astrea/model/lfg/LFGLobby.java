@@ -7,19 +7,32 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @JsonFormat
 public class LFGLobby {
 
 
 
-    private long lfgLobbyId;
+    private UUID lfgLobbyId;
 
     private LobbyType type;
 
     private int maxPlayers;
 
     private final ArrayList<User> players = new ArrayList<>();
+
+
+
+
+    public LFGLobby(LFGLobbySettings settings){
+        this.type = settings.getType();
+        this.maxPlayers = settings.maxPlayers;
+        this.lfgLobbyId = UUID.randomUUID();
+
+    }
+
+    private LFGLobby(){}
 
     //Getters
 
@@ -33,7 +46,7 @@ public class LFGLobby {
     }
 
     //Generic Gets
-    public long getLfgLobbyId() {
+    public UUID getLfgLobbyId() {
         return lfgLobbyId;
     }
 
@@ -52,7 +65,7 @@ public class LFGLobby {
 
 
     //Setters
-    public void setLfgLobbyId(long lfgLobbyId) {
+    public void setLfgLobbyId(UUID lfgLobbyId) {
         this.lfgLobbyId = lfgLobbyId;
     }
 

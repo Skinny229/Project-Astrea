@@ -5,9 +5,9 @@ import com.echovrprotocol.astrea.model.echovr.EchoSession;
 import com.echovrprotocol.astrea.model.lfg.LFGLobby;
 import com.echovrprotocol.astrea.model.lfg.LFGLobbySettings;
 import com.echovrprotocol.astrea.model.lfg.LobbyFilters;
+import com.echovrprotocol.astrea.model.lfg.LobbyType;
 import com.echovrprotocol.astrea.service.LFGLobbyService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.*;
+import com.echovrprotocol.astrea.service.UserService;
 import net.minidev.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/lfg", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -26,10 +27,13 @@ public class LFGController {
     final
     LFGLobbyService lfgLobbyService;
 
+    final UserService userService;
+
 
     @Autowired
-    public LFGController(LFGLobbyService lfgLobbyService) {
+    public LFGController(LFGLobbyService lfgLobbyService, UserService userService) {
         this.lfgLobbyService = lfgLobbyService;
+        this.userService = userService;
     }
 
 
@@ -37,7 +41,7 @@ public class LFGController {
     public JSONObject getLobbies(Authentication authentication, @RequestBody(required = false) LobbyFilters filters){
 
         JSONObject response = new JSONObject();
-        ArrayList<Long> ids = new ArrayList<>();
+        ArrayList<UUID> ids = new ArrayList<>();
 
         //Get public lobbies
         for(LFGLobby lobby : lfgLobbyService.getPublicLobbies())
@@ -52,13 +56,14 @@ public class LFGController {
     }
 
     @GetMapping(value = "/lobbydata", produces = "application/json")
-    public JSONObject getLobbyData(Authentication authentication,@RequestParam long id){
+    public JSONObject getLobbyData(Authentication authentication,@RequestParam UUID id){
         JSONObject response = new JSONObject();
         LFGLobby lobby = lfgLobbyService.getLobbyFromId(id);
 
         if(!authentication.isAuthenticated() || lobby == null)
             return response;
 
+        response.put("id", lobby.getLfgLobbyId());
         response.put("avatar", lobby.getLeader().getDiscordProfilePic());
         response.put("name", lobby.getLeader().getDiscordName());
         response.put("nickname", "WIP for v0.3.0");
@@ -80,9 +85,7 @@ public class LFGController {
 
 
     @GetMapping(value = "/joinLobby", produces = "application/json")
-    public JsonObject joinLobby(Authentication authentication, @RequestBody long id){
-        //Check user is not in another lobby
-        lfgLobbyService.removeFromLobbies(authentication);
+    public JSONObject joinLobby(Authentication authentication, @RequestParam UUID id){
         //register user with the lobby
         lfgLobbyService.addUserToLobby(authentication,id);
         //return lobby details
@@ -91,17 +94,23 @@ public class LFGController {
 
     @PostMapping(value = "/leaveLobby", produces = "application/json")
     public void leaveLobby(Authentication authentication){
+
         lfgLobbyService.removeFromLobbies(authentication);
     }
 
-    @PostMapping(value = "/createLobby", produces = "application/json")
-    public JsonObject createLobby(Authentication authentication, @RequestBody LFGLobbySettings settings){
+    @GetMapping(value = "/createlobby", produces = "application/json")
+    public JSONObject createLobby(Authentication authentication, @RequestBody(required = false) LFGLobbySettings settings){
         //Verify user is not in another lobby IF yes then logout
-        lfgLobbyService.removeFromLobbies(authentication);
+        leaveLobby(authentication);
         //create lobby
+        if(settings == null)
+            settings = new LFGLobbySettings(8,LobbyType.PUBLIC);
         lfgLobbyService.createLobby(authentication,settings);
         //Generate lobby and assign it to user
+       // return "lobbyStatus(authentication)";
+
         return lobbyStatus(authentication);
+
     }
 
     @PostMapping(value = "/delLobby", produces = "application/json")
@@ -110,19 +119,19 @@ public class LFGController {
     }
 
     @GetMapping(value = "/lobbyStatus", produces = "application/json")
-    public JsonObject lobbyStatus(Authentication authentication, @RequestBody (required = false) LFGLobby lobby){
+    public JSONObject lobbyStatus(Authentication authentication, @RequestBody (required = false) LFGLobby lobbyInput){
         //verify user is with the lobby
-        if(!lfgLobbyService.isUserInLobby(authentication)) {
+        if(!lfgLobbyService.isUserInALobby(authentication)) {
             return null;
         }
 
-        if(lobby == null)
-            try {
-                Gson gson = new Gson();
-                return new JsonParser().parse(gson.toJson(lfgLobbyService.getLobbyFromUser(authentication))).getAsJsonObject();
-            } catch (Exception ignored){}
-        //return lobby details + echosessionid
-        return null;
+        JSONObject status = new JSONObject();
+        userService.refreshLFG(authentication);
+        LFGLobby lobby = lfgLobbyService.getLobbyFromUser(authentication);
+
+        status.put("lobby", lobby);
+
+        return status;
     }
 
 
@@ -131,7 +140,7 @@ public class LFGController {
         //Return details concerning echo session status
     }
 
-    private JsonObject lobbyStatus(Authentication authentication){
+    private JSONObject lobbyStatus(Authentication authentication){
         return lobbyStatus(authentication, lfgLobbyService.getLobbyFromUser(authentication));
     }
 

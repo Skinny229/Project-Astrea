@@ -1,24 +1,19 @@
-const request = require('request');
 const envVariables = require('../env-variables');
-const authService = require('./auth-service');
-const axios = require('axios');
+const isDev = require('electron-is-dev');
+
+
+const {apiIdentifier, auth0Domain, clientId, backendURL, prodBackendURL} = envVariables;
 
 
 
-const {apiIdentifier, auth0Domain, clientId, backendURL} = envVariables;
-
-
-function getLFGGames(){
-  return new Promise(async (resolve,reject) => {
-   
-  });
+function getBackendURL(){
+    if(isDev)
+      return backendURL
+    else
+      return prodBackendURL
 }
-
-function updateLobby(){}
-
-function updateEchoSession(){}
 
 
 module.exports = {
-  getLFGGames
+ getBackendURL
 };

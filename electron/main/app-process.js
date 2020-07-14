@@ -6,12 +6,13 @@ const request = require('request');
 
 const {apiIdentifier, auth0Domain, clientId, backendURL} = envVariables;
 
+var mainWindow;
 
 function createAppWindow() {
 
 
   const onAuthLogin = {
-    method: 'GET',
+    method: 'POST',
     url: `http://${backendURL}/api/misc/onlogin`,
     headers: {'Authorization': 'Bearer ' + authService.getAccessToken()},
   };
@@ -36,11 +37,19 @@ function createAppWindow() {
   if(!isDev)
     win.removeMenu();
 
-  
+  mainWindow = win;
   win.loadFile('./renderers/home/home.html');
   win.on('closed', () => {
     win = null;
+    mainWindow = null;
   });
 }
 
-module.exports = createAppWindow;
+
+
+
+function goToLobby(){
+  mainWindow.loadFile('./renderers/lfg/lobby.html');
+}
+
+module.exports ={ createAppWindow,goToLobby};
