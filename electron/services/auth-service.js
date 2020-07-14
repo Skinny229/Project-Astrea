@@ -5,7 +5,7 @@ const envVariables = require('../env-variables');
 const keytar = require('keytar');
 const os = require('os');
 
-const {apiIdentifier, auth0Domain, clientId} = envVariables;
+const {apiIdentifier, auth0Domain, clientId, backendURL} = envVariables;
 
 const redirectUri = `file:///callback`;
 
@@ -51,6 +51,7 @@ function refreshTokens() {
       json: true,
     };
 
+    //Get access tokens
     request(refreshOptions, async function (error, response, body) {
       if (error || body.error) {
         await logout();
@@ -62,6 +63,7 @@ function refreshTokens() {
 
       resolve();
     });
+
   });
 }
 

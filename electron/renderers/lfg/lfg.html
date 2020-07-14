@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="lfg.css">
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Astrea LFG</title>
+</head>
+
+<body style="background-image: url(https://cdn.discordapp.com/attachments/719669089286488138/719674846061133854/echobg-small.jpg);background-position: center;
+    background-size: fill;">
+   
+    <div class="row bg-primary">
+
+        <div class="col-md-2 text-center">Game Leader</div>
+        <div class="col-md-3 text-center">Nickname</div>
+        <div class="col-md-2 text-center">Players</div>
+        <div class="col-md-2 text-center">Status</div>
+        <div class="col-md-3 text-center">
+            <a type="button" id="creategame" class="btn btn-info text-center">Create Game</a>
+            <a type="button" id="lfgreload" class="btn btn-warning text-center">Reload
+
+            </a>
+            <a type="button" href="../home/home.html" class="btn btn-danger text-center">Home</a>
+        </div>
+    </div>
+    <div class="row">.</div>
+
+    <div id="listings">
+        <div class="card">
+            <div class="card-header">
+                <div class="row bg-light">
+                    <div class="col-md-1 text-right"><img id="profilepic"
+                            src="https://cdn.discordapp.com/attachments/667493434092945428/714714537202417664/Screenshot_112.png"
+                            class="profile-crop profile-pic"></div>
+                    <div class="col-md-1 text-left">Skinny</div>
+                    <div class="col-md-3 text-center">Testing, please reload to load the actual games</div>
+                    <div class="col-md-2 text-center">1/8</div>
+                    <div class="col-md-2 text-center">In-Game -- WAITING</div>
+                    <div class="col-md-2 text-center">
+                        <a class="btn btn-primary" data-toggle="collapse" href="#players1">Info</a>
+                        <a type="button" id="join" class="btn btn-success">Join</a>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="players1">
+                <div class="pannel-body">
+                    Players: Not zeus, Skinnay
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+      <script src="lfg.js"></script>
+</body>
+
+</html>

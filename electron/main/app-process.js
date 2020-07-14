@@ -1,19 +1,55 @@
 const {BrowserWindow} = require('electron');
+const authService = require('../services/auth-service');
+const envVariables = require('../env-variables');
+const isDev = require('electron-is-dev');
+const request = require('request');
+
+const {apiIdentifier, auth0Domain, clientId, backendURL} = envVariables;
+
+var mainWindow;
 
 function createAppWindow() {
+
+
+  const onAuthLogin = {
+    method: 'POST',
+    url: `http://${backendURL}/api/misc/onlogin`,
+    headers: {'Authorization': 'Bearer ' + authService.getAccessToken()},
+  };
+  request(onAuthLogin, async function (error, response, body) {
+    if (error || body.error) {
+      console.log("uh oh");
+      //await logout();
+      //return reject(error || body.error);
+    }
+
+
+  });
+
   let win = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1300,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     },
   });
 
-  win.loadFile('./renderers/home.html');
+  if(!isDev)
+    win.removeMenu();
 
+  mainWindow = win;
+  win.loadFile('./renderers/home/home.html');
   win.on('closed', () => {
     win = null;
+    mainWindow = null;
   });
 }
 
-module.exports = createAppWindow;
+
+
+
+function goToLobby(){
+  mainWindow.loadFile('./renderers/lfg/lobby.html');
+}
+
+module.exports ={ createAppWindow,goToLobby};

@@ -1,5 +1,7 @@
 {
   "apiIdentifier": "https://my-echo-server",
   "auth0Domain": "echotest.auth0.com",
-  "clientId": "9htgEUNZGcYZ4HLKVKwfeCXXkK3WAueG"
+  "clientId": "ouEioHgyJZ9EqwQXdTNyIBQsT8HnpeE8",
+  "backendURL": "http://localhost:3000/",
+  "prodBackendURL": "http://echovrprotocol.com/"
 }
