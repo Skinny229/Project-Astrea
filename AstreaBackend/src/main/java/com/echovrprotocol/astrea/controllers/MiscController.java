@@ -31,7 +31,7 @@ public class MiscController {
 
         System.out.println("we got here");
         ////If the user is authenticated and is not registered then add him to the DB
-        if( possibleUser.isEmpty() ){
+        if( !possibleUser.isPresent() ){
             User newUser = new User();
             newUser.setDiscordId(possibleId);
             //newUser.setDiscordProfilePic();
