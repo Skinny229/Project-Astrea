@@ -122,8 +122,9 @@ public class LFGController {
         //If user is host of the lobby remove him and eliminate session
     }
 
-    @GetMapping(value = "/lobbyStatus", produces = "application/json")
-    public JSONObject lobbyStatus(Authentication authentication, @RequestBody(required = false) LFGLobby lobbyInput) {
+
+    @GetMapping(value = "/lobbystatus", produces = "application/json")
+    public JSONObject lobbyStatus(Authentication authentication, @RequestBody (required = false) LFGLobby lobbyInput){
         //verify user is with the lobby
         if (!lfgLobbyService.isUserInALobby(authentication)) {
             return (JSONObject) new JSONObject().put("status", "BAD");
