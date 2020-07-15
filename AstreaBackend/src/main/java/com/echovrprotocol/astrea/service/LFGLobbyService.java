@@ -86,8 +86,7 @@ public class LFGLobbyService {
 
     public void addUserToLobby(Authentication authentication, UUID id) {
         LFGLobby lobby = LFGLobbies.get(id);
-        if(isUserInALobby(authentication) && lobby.getLfgLobbyId() != getLobbyFromUser(authentication).getLfgLobbyId())
-            removeFromLobbies(authentication);
+        removeFromLobbies(authentication);
         lobby.addUser(userService.getUser(authentication));
         save(lobby);
     }
