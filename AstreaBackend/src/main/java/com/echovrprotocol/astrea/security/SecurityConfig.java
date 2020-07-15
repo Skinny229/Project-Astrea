@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //LFG
                 .mvcMatchers("/api/lfg/lobbies").authenticated()
                 .mvcMatchers("/api/lfg/lobbydata").authenticated()
-                .mvcMatchers("/api/lfg/joinLobby").authenticated()
+                .mvcMatchers("/api/lfg/joinlobby").authenticated()
                 .mvcMatchers("/api/lfg/leavelobby").authenticated()
                 .mvcMatchers("/api/lfg/delLobby").authenticated()
                 .mvcMatchers("/api/lfg/createlobby").authenticated()

@@ -6,6 +6,8 @@ import com.echovrprotocol.astrea.model.echovr.EchoSession;
 import com.echovrprotocol.astrea.model.lfg.LFGLobby;
 import com.echovrprotocol.astrea.model.lfg.LFGLobbySettings;
 import com.echovrprotocol.astrea.model.lfg.LobbyType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import java.util.UUID;
 
 @Service
 public class LFGLobbyService {
+
+    private static final Logger logger = LoggerFactory.getLogger(LFGLobbyService.class);
 
     private static HashMap<Long, EchoSession> echoSessions = new HashMap<>();
     public static HashMap<UUID, LFGLobby> LFGLobbies = new HashMap<>();
@@ -48,7 +52,7 @@ public class LFGLobbyService {
     }
 
     public LFGLobby getLobbyFromUser(Authentication authentication) {
-
+        logger.info(String.format("Check to see authentication [%s] is in any lobbies",authentication.getName()));
         long discordId = AstreaUtility.getDiscordId(authentication.getName());
 
         for (LFGLobby lobby : LFGLobbies.values())
@@ -92,8 +96,9 @@ public class LFGLobbyService {
         LFGLobby newLobby = new LFGLobby(settings);
         newLobby.setMaxPlayers(8);
         newLobby.setType(LobbyType.PUBLIC);
+        newLobby.addUser(userService.getUser(authentication));
         save(newLobby);
-        addUserToLobby(authentication, newLobby.getLfgLobbyId());
+
 
     }
 
