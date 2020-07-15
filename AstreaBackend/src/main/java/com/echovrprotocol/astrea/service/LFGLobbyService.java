@@ -52,7 +52,6 @@ public class LFGLobbyService {
     }
 
     public LFGLobby getLobbyFromUser(Authentication authentication) {
-        logger.info(String.format("Check to see authentication [%s] is in any lobbies",authentication.getName()));
         long discordId = AstreaUtility.getDiscordId(authentication.getName());
 
         for (LFGLobby lobby : LFGLobbies.values())
