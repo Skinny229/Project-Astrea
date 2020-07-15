@@ -1,22 +1,11 @@
 const {remote} = require('electron');
-<<<<<<< HEAD
 require('jquery');
 require('bootstrap');
 const axios = require('axios');
 const astreaService = remote.require('./services/astrea-service');
 const authService = remote.require('./services/auth-service');
 const { promisify } = require('util');
-=======
-const astreaService = remote.require('./services/astrea-service');
 
-var loadLobbyID = astreaService.getCurrentLobbyID();
-
-function loadLobby(id){
-    console.log("Loading " + id);
-}
-
-
->>>>>>> 134f9e2e539cf500989fb836e8346fc56a285ea9
 
 const webContents = remote.getCurrentWebContents();
 

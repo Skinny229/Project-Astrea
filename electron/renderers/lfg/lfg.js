@@ -180,8 +180,6 @@ function generateGameLobbyDiv(lobby) {
 
 
 function onJoinAttempt(gameId) {
-  console.log('Trying to join this lobby with this id:' + gameId);
-  //setCurrentLobbyFocus(gameId);
   astreaService.setCurrentLobbyFocus(gameId);
   
 }
