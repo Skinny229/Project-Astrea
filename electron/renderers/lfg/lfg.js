@@ -3,6 +3,7 @@ const { remote } = require('electron');
 require('jquery');
 require('bootstrap');
 const axios = require('axios');
+const { setCurrentLobbyFocus } = require('../../services/astrea-service');
 const astreaService = remote.require('./services/astrea-service');
 const appProcess = remote.require('./main/app-process');
 const authService = remote.require('./services/auth-service');
@@ -152,6 +153,7 @@ function generateGameLobbyDiv(lobby) {
   joinButton.setAttribute('type', 'button');
   joinButton.setAttribute('class', 'btn btn-success');
   joinButton.setAttribute('onClick', 'onJoinAttempt("'+ lobby.id+'")');
+  joinButton.setAttribute('href', 'lobby.html');
   joinButton.innerHTML = 'Join';
   buttonSection.append(joinButton);
 
@@ -179,4 +181,7 @@ function generateGameLobbyDiv(lobby) {
 
 function onJoinAttempt(gameId) {
   console.log('Trying to join this lobby with this id:' + gameId);
+  //setCurrentLobbyFocus(gameId);
+  astreaService.setCurrentLobbyFocus(gameId);
+  
 }

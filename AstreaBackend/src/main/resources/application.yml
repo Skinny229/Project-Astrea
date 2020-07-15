@@ -1,6 +1,6 @@
-debug: true
+debug: false
 server:
-  port: 3000
+  port: 8080
   ssl:
     key-store: classpath:keystore/astreabackend.p12
     key-store-password: ""
