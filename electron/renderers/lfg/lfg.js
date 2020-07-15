@@ -180,6 +180,16 @@ function generateGameLobbyDiv(lobby) {
 
 
 function onJoinAttempt(gameId) {
-  astreaService.setCurrentLobbyFocus(gameId);
+  var lobbyDataEndPoint = astreaService.getBackendURL() + 'api/lfg/joinlobby';
+    axios.get(lobbyDataEndPoint, {
+        
+        headers: {
+          'Authorization': `Bearer ${authService.getAccessToken()}`,
+        }
+      }).then((response) => {
+         updatePlayers(response.data.lobby.players);
+      }).catch((error) => {
+        if (error) throw new Error(error);
+      });
+    }
   
-}
