@@ -58,8 +58,6 @@ public class LFGLobbyService {
             for (User user : lobby.getPlayers())
                 if (user.getDiscordId() == discordId)
                     return lobby;
-                else
-                    return null;
         return null;
     }
 

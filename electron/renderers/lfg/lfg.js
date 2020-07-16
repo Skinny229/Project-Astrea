@@ -153,7 +153,6 @@ function generateGameLobbyDiv(lobby) {
   joinButton.setAttribute('type', 'button');
   joinButton.setAttribute('class', 'btn btn-success');
   joinButton.setAttribute('onClick', 'onJoinAttempt("'+ lobby.id+'")');
-  joinButton.setAttribute('href', 'lobby.html');
   joinButton.innerHTML = 'Join';
   buttonSection.append(joinButton);
 
@@ -167,7 +166,7 @@ function generateGameLobbyDiv(lobby) {
   var playerList = "";
   playerList+=lobby.players[0].discordName;
   for(var i = 1; i < lobby.players.length; i++)
-    playerList += ", ";
+    playerList += ", "+ lobby.players[i].discordName;
   infoButtonDropDown.innerHTML = 'Players: ' + playerList;
   cardHeader.append(infoButtonDropDown);
 
@@ -188,6 +187,8 @@ function onJoinAttempt(gameId) {
         }
       }).then((response) => {
          
+      window.location.href = "lobby.html";
+
       }).catch((error) => {
         if (error) throw new Error(error);
       });

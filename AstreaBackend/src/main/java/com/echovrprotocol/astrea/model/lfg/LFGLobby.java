@@ -77,8 +77,9 @@ public class LFGLobby {
         this.players.add(user);
     }
 
-    public void removeUser(User user){
-        this.players.remove(user);
+    public void removeUser(User toDelete){
+
+        players.removeIf(user -> user.getDiscordId() == toDelete.getDiscordId());
 
     }
     public void setMaxPlayers(int max){
