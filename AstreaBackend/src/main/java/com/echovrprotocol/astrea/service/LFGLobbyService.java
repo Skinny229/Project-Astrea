@@ -84,6 +84,7 @@ public class LFGLobbyService {
     public void addUserToLobby(Authentication authentication, UUID id) {
         LFGLobby lobby = LFGLobbies.get(id);
         removeFromLobbies(authentication);
+        userService.refreshLFG(authentication);
         lobby.addUser(userService.getUser(authentication));
         save(lobby);
     }
@@ -92,6 +93,7 @@ public class LFGLobbyService {
         LFGLobby newLobby = new LFGLobby(settings);
         newLobby.setMaxPlayers(8);
         newLobby.setType(LobbyType.PUBLIC);
+        userService.refreshLFG(authentication);
         newLobby.addUser(userService.getUser(authentication));
         save(newLobby);
 
@@ -100,5 +102,9 @@ public class LFGLobbyService {
 
     public LFGLobby getLobbyFromId(UUID id) {
         return LFGLobbies.get(id);
+    }
+
+    public void deleteLobby(UUID lfgLobbyId) {
+        LFGLobbies.remove(lfgLobbyId);
     }
 }
