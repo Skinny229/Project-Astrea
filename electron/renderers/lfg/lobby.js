@@ -36,6 +36,7 @@ async function mainUpdateLoop(){
       }).then((response) => {
          updatePlayers(response.data.lobby.players);
       }).catch((error) => {
+        document.getElementById('plyColumn').innerHTML = '<div class="alert alert-danger alert-dismissible fade hide show" role="alert"> <strong>ERROR!</strong> It seems something is wrong with the backend server. Please contact Skinny if the issue persists<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> ';
         if (error) throw new Error(error);
       });
     }

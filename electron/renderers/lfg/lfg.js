@@ -1,6 +1,6 @@
 const { remote } = require('electron');
 //var jquery = remote.require('jquery');
-require('jquery');
+var $ = require('jquery');
 require('bootstrap');
 const axios = require('axios');
 const { setCurrentLobbyFocus } = require('../../services/astrea-service');
@@ -14,8 +14,8 @@ const webContents = remote.getCurrentWebContents();
 var backendAddress = astreaService.getBackendURL();
 
 webContents.on('dom-ready', () => {
-
-  //reloadListings();
+  
+  reloadListings();
 
 })
 
@@ -33,6 +33,8 @@ document.getElementById('creategame').onclick = async () => {
       }).then((response) => {
         appProcess.goToLobby();
       }).catch((error) => {
+        listingsDiv.innerHTML = '<div class="alert alert-danger alert-dismissible fade hide show" role="alert"> <strong>ERROR!</strong> It seems something is wrong with the backend server. Please contact Skinny if the issue persists<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> ';
+
         if (error) throw new Error(error);
       });
 };
@@ -61,6 +63,8 @@ async function reloadListings() {
 
       getLFGLobbyDetails(response.data);
     }).catch((error) => {
+      listingsDiv.innerHTML = '<div class="alert alert-danger alert-dismissible fade hide show" role="alert"> <strong>ERROR!</strong> It seems something is wrong with the backend server. Please contact Skinny if the issue persists<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> ';
+
       if (error) throw new Error(error);
     });
 
@@ -69,10 +73,12 @@ async function reloadListings() {
 
   async function getLFGLobbyDetails(lobbyArr) {
     var lobbyDataAddress = backendAddress + 'api/lfg/lobbydata';
-    console.log('got here');
     console.log(lobbyArr.lobbyids);
     var ids = lobbyArr.lobbyids;
     var listingsDiv = document.getElementById('listings');
+    if(ids.length == 0){
+      listingsDiv.innerHTML = '<div class="alert alert-warning alert-dismissible fade hide show" role="alert"> <strong>Oh no!</strong> It seems there\'s no active games, press \'Create Game\' to start one yourself!<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> ';
+    }
     for (var i = 0; i < ids.length; i++) {
       axios.get(lobbyDataAddress, {
         headers: {
@@ -84,7 +90,10 @@ async function reloadListings() {
       }).then((response) => {
         listingsDiv.append(generateGameLobbyDiv(response.data));
       }).catch((error) => {
+        listingsDiv.innerHTML = '<div class="alert alert-danger alert-dismissible fade hide show" role="alert"> <strong>ERROR!</strong> It seems something is wrong with the backend server. Please contact Skinny if the issue persists<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> ';
+
         if (error) throw new Error(error);
+
       });
     }
   }

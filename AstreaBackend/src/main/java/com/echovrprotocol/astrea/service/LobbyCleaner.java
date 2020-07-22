@@ -31,17 +31,19 @@ public class LobbyCleaner implements Runnable {
 
         while (true) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                continue;
             }
 
             LocalDateTime timeCheckStart = LocalDateTime.now();
             for (LFGLobby lobby : lfgLobbyService.getPublicLobbies()) {
                 ArrayList<User> toRemove = new ArrayList<>();
                 for (User user : lobby.getPlayers()) {
-                    double timeDifference =  ChronoUnit.SECONDS.between(user.getLastLFGRequestUpdate(), timeCheckStart);
-                    if(Math.abs(timeDifference) > 10) {
+                    User updatedUser = userService.getUser(user.getDiscordId()).get();
+                    double timeDifference =  ChronoUnit.SECONDS.between(updatedUser.getLastLFGRequestUpdate(), timeCheckStart);
+                    if(Math.abs(timeDifference) > 6) {
                         toRemove.add(user);
                         logger.info(String.format("Removing [%s] from [%s] with time difference %ss",user.getDiscordName(),lobby.getLfgLobbyId(),timeDifference));
                     }

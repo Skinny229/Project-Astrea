@@ -104,6 +104,7 @@ public class LFGController {
 
     @GetMapping(value = "/createlobby", produces = "application/json")
     public JSONObject createLobby(Authentication authentication, @RequestBody(required = false) LFGLobbySettings settings) {
+        logger.info("Starting Lobby Creation Process for " + authentication.getName());
         //Verify user is not in another lobby IF yes then logout
         leaveLobby(authentication);
         //create lobby
