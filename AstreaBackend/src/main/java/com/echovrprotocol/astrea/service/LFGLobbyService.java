@@ -67,6 +67,10 @@ public class LFGLobbyService {
         if (userInLobby == null)
             return;
         userInLobby.removeUser(userService.getUser(authentication));
+        if(userInLobby.getPlayerCount() == 0) {
+            deleteLobby(userInLobby.getLfgLobbyId());
+            return;
+        }
         save(userInLobby);
     }
 
@@ -106,5 +110,6 @@ public class LFGLobbyService {
 
     public void deleteLobby(UUID lfgLobbyId) {
         LFGLobbies.remove(lfgLobbyId);
+        logger.info("Lobby deleted");
     }
 }

@@ -96,7 +96,7 @@ public class LFGController {
         return lobbyStatus(authentication);
     }
 
-    @PostMapping(value = "/leaveLobby", produces = "application/json")
+    @GetMapping(value = "/leaveLobby", produces = "application/json")
     public void leaveLobby(Authentication authentication) {
 
         lfgLobbyService.removeFromLobbies(authentication);

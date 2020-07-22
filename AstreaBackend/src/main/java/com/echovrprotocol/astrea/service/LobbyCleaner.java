@@ -54,7 +54,7 @@ public class LobbyCleaner implements Runnable {
                     lfgLobbyService.save(lobby);
                 }
                 if(lobby.getPlayers().size() == 0) {
-                    logger.info("Deleting lobby");
+                    logger.info("Deleting lobby thru cleaner");
                     lfgLobbyService.deleteLobby(lobby.getLfgLobbyId());
                 }
             }

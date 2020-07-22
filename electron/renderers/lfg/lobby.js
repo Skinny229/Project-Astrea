@@ -6,7 +6,7 @@ const astreaService = remote.require('./services/astrea-service');
 const authService = remote.require('./services/auth-service');
 const { promisify } = require('util');
 
-
+var backendAddress = astreaService.getBackendURL();
 const webContents = remote.getCurrentWebContents();
 
 function sleep(ms) {
@@ -21,6 +21,27 @@ webContents.on('dom-ready', () => {
   })
   
 
+
+  document.getElementById('leavelobby').onclick = async () => {
+    var leaveLobbyAddress = backendAddress + 'api/lfg/leaveLobby';
+
+    axios.get(leaveLobbyAddress, {
+      headers: {
+        'Authorization': `Bearer ${authService.getAccessToken()}`,
+      },
+    }).then((response) => {
+      window.location.href = "lfg.html";
+
+    }).catch((error) => {
+      window.location.href = "lfg.html";
+
+      if (error) throw new Error(error);
+    });
+
+    
+
+  };
+  
 
 
 async function mainUpdateLoop(){
