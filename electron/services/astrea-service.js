@@ -6,6 +6,8 @@ const {apiIdentifier, auth0Domain, clientId, backendURL, prodBackendURL} = envVa
 
 var setGameID = "";
 
+var echoSesionId = "";
+
 function getBackendURL(){
     if(isDev)
       return backendURL
@@ -21,8 +23,17 @@ function getCurrentLobbyFocus(){
   return this.setGameID;
 }
 
+function setEchoSessionId(sessionId){
+  echoSesionId = sessionId;
+}
+
+function getEchoSessionId(){
+  return echoSesionId;
+}
 
 module.exports = {
  getBackendURL,
- setCurrentLobbyFocus
+ setCurrentLobbyFocus,
+ setEchoSessionId,
+ getEchoSessionId
 };

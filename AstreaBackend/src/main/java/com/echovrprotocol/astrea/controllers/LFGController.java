@@ -81,9 +81,9 @@ public class LFGController {
     }
 
 
-    @PostMapping("/linkEchoSession")
-    public void linkEchoSession() {
-        //Make sure no link has been done
+    @GetMapping("/linkEchoSession")
+    public void linkEchoSession(Authentication authentication, @RequestParam UUID sessionid){
+        lfgLobbyService.saveEchoSessionId(authentication,sessionid);
     }
 
 
@@ -96,7 +96,7 @@ public class LFGController {
         return lobbyStatus(authentication);
     }
 
-    @PostMapping(value = "/leaveLobby", produces = "application/json")
+    @GetMapping(value = "/leaveLobby", produces = "application/json")
     public void leaveLobby(Authentication authentication) {
 
         lfgLobbyService.removeFromLobbies(authentication);
@@ -104,6 +104,7 @@ public class LFGController {
 
     @GetMapping(value = "/createlobby", produces = "application/json")
     public JSONObject createLobby(Authentication authentication, @RequestBody(required = false) LFGLobbySettings settings) {
+        logger.info("Starting Lobby Creation Process for " + authentication.getName());
         //Verify user is not in another lobby IF yes then logout
         leaveLobby(authentication);
         //create lobby
@@ -122,8 +123,9 @@ public class LFGController {
         //If user is host of the lobby remove him and eliminate session
     }
 
-    @GetMapping(value = "/lobbyStatus", produces = "application/json")
-    public JSONObject lobbyStatus(Authentication authentication, @RequestBody(required = false) LFGLobby lobbyInput) {
+
+    @GetMapping(value = "/lobbystatus", produces = "application/json")
+    public JSONObject lobbyStatus(Authentication authentication, @RequestBody (required = false) LFGLobby lobbyInput){
         //verify user is with the lobby
         if (!lfgLobbyService.isUserInALobby(authentication)) {
             return (JSONObject) new JSONObject().put("status", "BAD");
@@ -138,6 +140,7 @@ public class LFGController {
 
         return status;
     }
+
 
 
     @GetMapping(value = "/echoSessionStatus", produces = "application/json")

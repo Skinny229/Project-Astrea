@@ -5,8 +5,6 @@ import com.echovrprotocol.astrea.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @JsonFormat
@@ -15,6 +13,8 @@ public class LFGLobby {
 
 
     private UUID lfgLobbyId;
+
+    private UUID echoSessionId;
 
     private LobbyType type;
 
@@ -62,7 +62,9 @@ public class LFGLobby {
         return players;
     }
 
-
+    public UUID getEchoSessionId() {
+        return echoSessionId;
+    }
 
     //Setters
     public void setLfgLobbyId(UUID lfgLobbyId) {
@@ -77,14 +79,16 @@ public class LFGLobby {
         this.players.add(user);
     }
 
-    public void removeUser(User user){
-        this.players.remove(user);
+    public void removeUser(User toDelete){
+
+        players.removeIf(user -> user.getDiscordId() == toDelete.getDiscordId());
 
     }
     public void setMaxPlayers(int max){
         this.maxPlayers = max;
     }
 
-
-
+    public void setEchoSessionId(UUID echoSessionId) {
+        this.echoSessionId = echoSessionId;
+    }
 }

@@ -23,8 +23,8 @@ function createAppWindow() {
     },
   });
 
-  if(!isDev)
-    win.removeMenu();
+  //if(!isDev)
+   // win.removeMenu();
 
   mainWindow = win;
   win.loadFile('./renderers/home/home.html');

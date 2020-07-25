@@ -52,15 +52,12 @@ public class LFGLobbyService {
     }
 
     public LFGLobby getLobbyFromUser(Authentication authentication) {
-        logger.info(String.format("Check to see authentication [%s] is in any lobbies",authentication.getName()));
         long discordId = AstreaUtility.getDiscordId(authentication.getName());
 
         for (LFGLobby lobby : LFGLobbies.values())
             for (User user : lobby.getPlayers())
                 if (user.getDiscordId() == discordId)
                     return lobby;
-                else
-                    return null;
         return null;
     }
 
@@ -70,6 +67,10 @@ public class LFGLobbyService {
         if (userInLobby == null)
             return;
         userInLobby.removeUser(userService.getUser(authentication));
+        if(userInLobby.getPlayerCount() == 0) {
+            deleteLobby(userInLobby.getLfgLobbyId());
+            return;
+        }
         save(userInLobby);
     }
 
@@ -86,8 +87,8 @@ public class LFGLobbyService {
 
     public void addUserToLobby(Authentication authentication, UUID id) {
         LFGLobby lobby = LFGLobbies.get(id);
-        if(isUserInALobby(authentication) && lobby.getLfgLobbyId() != getLobbyFromUser(authentication).getLfgLobbyId())
-            removeFromLobbies(authentication);
+        removeFromLobbies(authentication);
+        userService.refreshLFG(authentication);
         lobby.addUser(userService.getUser(authentication));
         save(lobby);
     }
@@ -96,6 +97,7 @@ public class LFGLobbyService {
         LFGLobby newLobby = new LFGLobby(settings);
         newLobby.setMaxPlayers(8);
         newLobby.setType(LobbyType.PUBLIC);
+        userService.refreshLFG(authentication);
         newLobby.addUser(userService.getUser(authentication));
         save(newLobby);
 
@@ -104,5 +106,16 @@ public class LFGLobbyService {
 
     public LFGLobby getLobbyFromId(UUID id) {
         return LFGLobbies.get(id);
+    }
+
+    public void deleteLobby(UUID lfgLobbyId) {
+        LFGLobbies.remove(lfgLobbyId);
+        logger.info("Lobby deleted");
+    }
+
+    public void saveEchoSessionId(Authentication authentication,UUID sessionid) {
+        LFGLobby lobby = getLobbyFromUser(authentication);
+        lobby.setEchoSessionId(sessionid);
+        save(lobby);
     }
 }

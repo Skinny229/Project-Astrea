@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="lfg.css">
+
     <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Astrea Lobby</title>
 </head>
@@ -14,7 +15,7 @@
 
     <div class="container">
         <div class="row">
-        <div class="col-3 align-self-center">
+        <div id="plyColumn" class="col-3 align-self-center">
             <div class="row card align-self-start"> 
                 <p class="align-self-center">Player 1</p>
             </div>
@@ -24,11 +25,21 @@
         </div>
 
         <div class="col-3 align-self-center">
-            <div class="row card align-self-start"> 
+            <div class="row card bg-warning align-self-start"> 
                 <p>Highly skilled monkeys are deployed on finishing this part of the website, for now the player list should automatically update as players join and leave(by closing the application)</p>
                 </div>
             </div>
+            <div class="col-3  align-self-center">
+                <div id="actionButtons" class="row card bg-dark align-self-start"> 
+                    <button id="leavelobby" type="button" class="btn btn-danger">Leave LFG Lobby</button>
+                    <button id="noEchoLink" type="button" class="btn btn-warning">No Echo Lobby Linked</button>
+                    </button>
+                    <button id="linkEchoPrivateGame" type="button" class="btn btn-info">(Re)Link Private Echo Lobby</button>
+                    </div>
+                </div>
+            </div>
         </div>
+    
     </div>
  
 
