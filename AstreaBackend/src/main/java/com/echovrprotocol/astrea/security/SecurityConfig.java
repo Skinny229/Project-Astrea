@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/lfg/delLobby").authenticated()
                 .mvcMatchers("/api/lfg/createlobby").authenticated()
                 .mvcMatchers("/api/lfg/lobbystatus").authenticated()
-                .mvcMatchers("/api/lfg/updateEchoSessionStatus").authenticated()
+                .mvcMatchers("/api/lfg/linkEchoSession").authenticated()
                 //misc
                 .mvcMatchers("/api/misc/onlogin").authenticated()
                 //Group Maker

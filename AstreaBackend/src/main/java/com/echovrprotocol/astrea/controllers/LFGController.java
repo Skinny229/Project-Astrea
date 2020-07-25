@@ -81,9 +81,9 @@ public class LFGController {
     }
 
 
-    @PostMapping("/linkEchoSession")
-    public void linkEchoSession() {
-        //Make sure no link has been done
+    @GetMapping("/linkEchoSession")
+    public void linkEchoSession(Authentication authentication, @RequestParam UUID sessionid){
+        lfgLobbyService.saveEchoSessionId(authentication,sessionid);
     }
 
 
@@ -140,6 +140,7 @@ public class LFGController {
 
         return status;
     }
+
 
 
     @GetMapping(value = "/echoSessionStatus", produces = "application/json")

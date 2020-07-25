@@ -17,6 +17,7 @@ function sleep(ms) {
 
 webContents.on('dom-ready', () => {
     console.log('got here');
+    astreaService.setEchoSessionId("");
     mainUpdateLoop();
   
   })
@@ -29,7 +30,7 @@ webContents.on('dom-ready', () => {
     axios.get(leaveLobbyAddress, {
       headers: {
         'Authorization': `Bearer ${authService.getAccessToken()}`,
-      },
+      }
     }).then((response) => {
       window.location.href = "lfg.html";
 
@@ -41,18 +42,19 @@ webContents.on('dom-ready', () => {
   };
 
   document.getElementById('linkEchoPrivateGame').onclick = async () => {
-    var echoVr = '127.0.0.1:6721/session';
+    var echoVr = 'http://127.0.0.1:6721/session';
 
-    axios.get(echoVr, {}).then((response) => {
-      await sendToBackend(response.data.sessionid);
+    axios.get(echoVr, {
+      headers: {
+        'Authorization': `Bearer ${authService.getAccessToken()}`,
+      }
+    }).then((response) => {
+       sendToBackend(response.data.sessionid);
+    
     }).catch((error) => {
       if (error) throw new Error(error);
     });
 
-  };
-
-  document.getElementById('joinEchoLobby').onclick = async () => {
-    echoProtocolService.launchAsPlayer(astreaService.getEchoSessionId());
   };
 
 
@@ -60,13 +62,16 @@ async function sendToBackend(sessionid){
 
   var linklobbyaddress = backendAddress + 'api/lfg/linkEchoSession?sessionid='+sessionid;
 
+
   axios.get(linklobbyaddress, {
     headers: {
       'Authorization': `Bearer ${authService.getAccessToken()}`,
     },
   }).then((response) => {
+   
 
   }).catch((error) => {
+
     if (error) throw new Error(error);
   });
 }
@@ -84,11 +89,11 @@ async function mainUpdateLoop(){
         }
       }).then((response) => {
          updatePlayers(response.data.lobby.players);
-         if(response.data.lobby.echoSessionId != null){
-            displayJoinButton();
+         if(astreaService.getEchoSessionId() == "" && response.data.lobby.echoSessionId != null){
             astreaService.setEchoSessionId(response.data.lobby.echoSessionId);
-         }
+            displayJoinButton();
             
+         }
       }).catch((error) => {
         document.getElementById('plyColumn').innerHTML = '<div class="alert alert-danger alert-dismissible fade hide show" role="alert"> <strong>ERROR!</strong> It seems something is wrong with the backend server. Please contact Skinny if the issue persists<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> ';
         if (error) throw new Error(error);
@@ -99,6 +104,9 @@ async function mainUpdateLoop(){
 
 async function displayJoinButton()
 {
+    console.log("got here2");
+    var nolink = document.getElementById('noEchoLink');
+    nolink.parentNode.removeChild(nolink);
 
     var joinLobbyButton = document.createElement('div');
     joinLobbyButton.setAttribute('class', 'btn btn-success');
@@ -106,6 +114,11 @@ async function displayJoinButton()
     joinLobbyButton.setAttribute('id', 'joinEchoLobby');
     joinLobbyButton.innerHTML='Join Echo Lobby<div class="spinner-border spinner-border-sm text-dark" role="status"> <span class="sr-only">Loading...</span></div>';
     document.getElementById('actionButtons').append(joinLobbyButton);
+    
+  document.getElementById('joinEchoLobby').onclick = async () => {
+    echoProtocolService.launchAsPlayer(astreaService.getEchoSessionId());
+  };
+
 }
 
 async function updatePlayers(playersArr){
@@ -114,8 +127,15 @@ async function updatePlayers(playersArr){
 
     for(var i = 0; i < playersArr.length; i++){
         var playerNameContainer = document.createElement('div');
-        playerNameContainer.setAttribute('class', 'row card align-self-start');
-        playerNameContainer.innerHTML = '<p class="align-self-center">'+playersArr[i].discordName+'</p>';
+        playerNameContainer.setAttribute('class', 'row card col-12');
+        var playerPfpDiv = document.createElement('img');
+        playerPfpDiv.setAttribute('class', 'profile-crop profile-pic');
+        playerPfpDiv.setAttribute('src', playersArr[i].discordProfilePic);
+        playerNameContainer.append(playerPfpDiv);
+        var playerNameDiv = document.createElement('p');
+        playerNameDiv.setAttribute('class', 'align-self-center')
+        playerNameDiv.innerHTML = playersArr[i].discordName;
+        playerNameContainer.append(playerNameDiv);
         playerColumn.append(playerNameContainer);
     }
 

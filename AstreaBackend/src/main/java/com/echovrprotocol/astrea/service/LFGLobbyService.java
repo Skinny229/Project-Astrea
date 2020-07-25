@@ -112,4 +112,10 @@ public class LFGLobbyService {
         LFGLobbies.remove(lfgLobbyId);
         logger.info("Lobby deleted");
     }
+
+    public void saveEchoSessionId(Authentication authentication,UUID sessionid) {
+        LFGLobby lobby = getLobbyFromUser(authentication);
+        lobby.setEchoSessionId(sessionid);
+        save(lobby);
+    }
 }

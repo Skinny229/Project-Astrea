@@ -14,6 +14,8 @@ public class LFGLobby {
 
     private UUID lfgLobbyId;
 
+    private UUID echoSessionId;
+
     private LobbyType type;
 
     private int maxPlayers;
@@ -60,7 +62,9 @@ public class LFGLobby {
         return players;
     }
 
-
+    public UUID getEchoSessionId() {
+        return echoSessionId;
+    }
 
     //Setters
     public void setLfgLobbyId(UUID lfgLobbyId) {
@@ -84,6 +88,7 @@ public class LFGLobby {
         this.maxPlayers = max;
     }
 
-
-
+    public void setEchoSessionId(UUID echoSessionId) {
+        this.echoSessionId = echoSessionId;
+    }
 }

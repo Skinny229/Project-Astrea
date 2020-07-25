@@ -6,7 +6,7 @@ const {apiIdentifier, auth0Domain, clientId, backendURL, prodBackendURL} = envVa
 
 var setGameID = "";
 
-var echoSesionId ="";
+var echoSesionId = "";
 
 function getBackendURL(){
     if(isDev)
@@ -27,8 +27,8 @@ function setEchoSessionId(sessionId){
   echoSesionId = sessionId;
 }
 
-function getEchoSessionId(sessionId){
-  return sessionId;
+function getEchoSessionId(){
+  return echoSesionId;
 }
 
 module.exports = {

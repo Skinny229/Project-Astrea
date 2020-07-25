@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="lfg.css">
+
     <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Astrea Lobby</title>
 </head>
@@ -28,18 +29,12 @@
                 <p>Highly skilled monkeys are deployed on finishing this part of the website, for now the player list should automatically update as players join and leave(by closing the application)</p>
                 </div>
             </div>
-            <div id="actionButtons" class="col-3  align-self-center">
-                <div class="row card bg-dark align-self-start"> 
+            <div class="col-3  align-self-center">
+                <div id="actionButtons" class="row card bg-dark align-self-start"> 
                     <button id="leavelobby" type="button" class="btn btn-danger">Leave LFG Lobby</button>
-                    <button id="noecholobby" type="button" class="btn btn-warning">No Echo Lobby Linked</button>
-
-                    <button id="joinLobby" type="button" class="btn btn-success">
-                        Join Echo Lobby
-                        <div class="spinner-border spinner-border-sm text-dark" role="status">
-                        <span class="sr-only">Loading...</span>
-                      </div>
+                    <button id="noEchoLink" type="button" class="btn btn-warning">No Echo Lobby Linked</button>
                     </button>
-                    <button type="button" class="btn btn-info">(Re)Link Private Echo Lobby</button>
+                    <button id="linkEchoPrivateGame" type="button" class="btn btn-info">(Re)Link Private Echo Lobby</button>
                     </div>
                 </div>
             </div>
